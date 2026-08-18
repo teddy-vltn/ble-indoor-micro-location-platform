@@ -1,0 +1,30 @@
+---
+- name: Setup Raspberry Pi
+  hosts: raspberry
+  become: yes
+
+  tasks:
+    - name: Installer Python3
+      apt:
+        name: python3
+        state: present
+
+    - name: Installer pip pour Python3
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Installer Git
+      apt:
+        name: git
+        state: present
+
+    - name: Assurez-vous que git est installé
+      apt:
+        name: git
+        state: present
+
+    - name: Install ntp
+      apt:
+        name: ntp
+        state: present

@@ -1,0 +1,170 @@
+/* Content Styling */
+.content {
+    margin-left: 60px; /* Matches sidebar width */
+    padding: 55px 30px 110px 30px; /* Ajustez le padding supérieur pour tenir compte du TopBar */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0px; /* Ajoutez cette ligne pour prendre en compte la hauteur du TopBar */
+    height: calc(100vh - 50px); /* Ajustez pour tenir compte de la hauteur du TopBar */
+    width: calc(100% - 120px); /* Ajustez la largeur pour prendre en compte la Sidebar */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+.space-between
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+  @media (max-width: 768px) {
+    .content {
+      margin-left: 0;
+      width: 100%; /* Ajustez la largeur pour les petits écrans */
+      padding: 60px 30px 110px 30px; /* Gardez le padding supérieur pour le TopBar */
+      top: 50px
+    }
+}  
+/* Section Styling */
+.section {
+    margin-top: 20px;
+}
+
+.sectionTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.sectionContent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sectionContent > div {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.sectionContent > div:last-child {
+    margin-right: 0;
+}
+
+.content::after {
+    content: "";
+    display: block;
+    height: 50px;
+    width: 100%;
+}
+
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Button Styling */
+button {
+    cursor: pointer;
+    background-color: #1e90ff;
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+button:hover {
+    background-color: #1b8dffd7;
+}
+
+.greenButton {
+    background-color: #4CAF50;
+}
+
+.redButton {
+    background-color: #f44336;
+}
+
+.redButton:hover {
+    background-color: #d32f2f;
+}
+
+.greyButton {
+    background-color: #f1f1f1;
+    color: #555;
+}
+
+.greyButton:hover {
+    background-color: #e1e1e1 !important;
+}
+
+.greyButton.selected {
+    background-color: #d3d3d3;
+}
+
+/* Form Elements Styling */
+select, input {
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select {
+    background-image: url("data:image/svg+xml,<svg width='24' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+select:focus, input:focus {
+    outline: none;
+}
+
+select:hover, input:hover {
+    background-color: #f1f1f1;
+}
+
+/* Heading Styling */
+h1, h2, h3 {
+    margin: 20px 0;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+/* Text Styling */
+span {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.topTitle {
+    font-weight: 600;
+}
+
+.topTitleSpan {
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: 300;
+}

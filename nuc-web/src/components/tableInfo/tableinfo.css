@@ -1,0 +1,87 @@
+.table {
+    width: 100%;
+    position:relative;
+}
+
+.tableInfo {
+    width: 100%;
+    min-height: max-content;
+    background-color: #fcfcfc;
+    border-spacing: 0;
+    border-collapse: collapse;
+    overflow-x: scroll;
+    /* Scroll bar always visible */
+    scrollbar-width: thin;
+    scrollbar-color: #f0f0f0 #ffffff00;
+
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+    padding: 12px 15px;
+    text-align: left;
+}
+td {
+    text-align: left; 
+}
+
+tbody tr:hover {
+    background-color: #D6EEEE;
+}
+
+
+.table button {
+    background-color: #ffffff00;
+    color: grey;
+    border: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+.table button:hover {
+    background-color: #ffffff00;
+}
+
+.actionButton {
+    height: 24px;
+    width: 24px;
+}
+
+.pagination {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #ffffff00;
+    color: grey;
+    border: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+.pagination button:hover {
+    background-color: #ffffff00;
+}

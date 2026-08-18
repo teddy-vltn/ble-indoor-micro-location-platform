@@ -1,0 +1,29 @@
+---
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /home/admin/data/*.csv
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+setup.kibana: null
+
+output.logstash:
+  hosts:
+    - 192.168.1.5:5044
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: null
+  - add_docker_metadata: null
+  - add_kubernetes_metadata: null
+  - drop_fields:
+      fields: ["host", "input", "agent"]
+      ignore_missing: true

@@ -1,0 +1,110 @@
+.mapContainer {
+    position: relative;
+    width: 90vw;
+    height: 60vh;
+}
+
+.map {
+    width: max-content;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.mapTransformWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.transform-component-module_wrapper__SPB86 {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+.mapSvg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.svgContainer {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: 'pointer';
+}
+
+.mapZoomControl {
+    position: absolute;
+    flex-direction: row-reverse;
+    bottom: 70px;
+    left: 10px;
+}
+
+.tools {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-left: 5px;
+    z-index: 100;
+}
+
+.toolsControl {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.saving {
+    z-index: 100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skipEvent {
+    pointer-events: none;
+}
+
+.tools button {
+    border: none;
+    background-color: #ffffff;
+    color: #313131;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.tools button:hover,
+.tools button:focus {
+    background-color: #e6e6e6;
+    transform: translateY(-1px);
+    outline: none; /* Removing focus border */
+}
+
+.tools button:active {
+    transform: translateY(0);
+}

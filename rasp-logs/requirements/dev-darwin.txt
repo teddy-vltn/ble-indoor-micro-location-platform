@@ -1,0 +1,3 @@
+pyobjc
+flask
+pre-commit

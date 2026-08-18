@@ -1,0 +1,6 @@
+networkx
+pymongo
+numpy
+matplotlib
+python-dotenv
+pyyaml

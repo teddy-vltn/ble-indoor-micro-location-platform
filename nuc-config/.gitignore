@@ -1,0 +1,8 @@
+logstash/logs
+.vscode/
+
+env/
+inventory/
+artifacts/
+
+**/__pycache__/

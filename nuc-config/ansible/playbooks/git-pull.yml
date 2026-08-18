@@ -1,0 +1,98 @@
+- name: Mettre à jour les dépôts Git sur le NUC et distribuer aux Raspberry Pi
+  hosts: localhost
+  become: yes
+  vars:
+    gitlab_access_token: "gitlab_access_token"
+    repo_url: "gitlab.com/username"
+    branch: "main"
+    slug: "project_name"
+ 
+  tasks:
+    - name: Tirer les dernières mises à jour du dépôt GitLab sur le NUC
+      git:
+        repo: "https://oauth2:{{ gitlab_access_token }}@{{ repo_url }}"
+        dest: "/opt/git_repos/{{ slug }}"
+        version: "{{ branch | default('main') }}"
+        accept_hostkey: yes
+      register: git_pull
+      ignore_errors: yes
+
+    - name: Vérifier si le dépôt Git a été mis à jour
+      debug:
+        msg: "Dépôt Git mis à jour avec succès"
+      when: git_pull is succeeded
+
+    - name: Archiver le dépôt Git dans un fichier tar
+      shell: |
+        cd /opt/git_repos && tar -czf {{ slug }}.tar.gz -C {{ slug }} .
+      args:
+        executable: /bin/bash
+      when: git_pull is succeeded
+
+    - name: S'assurer que le répertoire d'artéfacts existe
+      file:
+        path: "/opt/artifacts"
+        state: directory
+
+    - name: Copier l'archive dans le répertoire des artéfacts
+      copy:
+        src: "/opt/git_repos/{{ slug }}.tar.gz"
+        dest: "/opt/artifacts/{{ slug }}.tar.gz"
+      when: git_pull is succeeded
+
+    - name: Donner les bonnes permissions sur l'archive
+      file:
+        path: "/opt/artifacts/{{ slug }}.tar.gz"
+        mode: '0644'
+      when: git_pull is succeeded
+
+    - name: Vérifier si une archive existe déjà dans les artéfacts
+      stat:
+        path: "/opt/artifacts/{{ slug }}.tar.gz"
+      register: artifact_exists
+
+    - name: Vérifier si l'archive a été créée ou déjà disponible
+      debug:
+        msg: "Archive créée ou disponible"
+      when: artifact_exists.stat.exists
+
+- name: Déployer les projets Git sur les Raspberry Pi
+  hosts: raspberry
+  become: yes
+  vars:
+    slug: "project_name"
+ 
+  tasks:
+    - name: Supprimer le répertoire du projet s'il existe
+      file:
+        path: "/home/admin/{{ slug }}"
+        state: absent
+
+    - name: Créer le répertoire du projet
+      file:
+        path: "/home/admin/{{ slug }}"
+        state: directory
+        owner: admin
+        group: admin
+        mode: '0755'
+
+    - name: Décompresser l'archive dans le répertoire du projet
+      unarchive:
+        src: "/opt/artifacts/{{ slug }}.tar.gz"
+        dest: "/home/admin/{{ slug }}"
+    
+    - name: Vérifier la présence d'un requirements.txt
+      stat:
+        path: "/home/admin/{{ slug }}/requirements.txt"
+      register: requirements_file
+
+    - name: Installer les dépendances Python
+      pip:
+        requirements: "/home/admin/{{ slug }}/requirements.txt"
+      when: requirements_file.stat.exists
+ 
+    - name: Exécuter le script setup.sh en tant que sudo
+      shell: |
+        cd /home/admin/{{ slug }} && sudo chmod +x setup.sh && sudo ./setup.sh
+      args:
+        executable: /bin/bash

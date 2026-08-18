@@ -1,0 +1,30 @@
+{
+    "i18n-ally.localesPaths": ["public/locales"],
+    "i18n-ally.sourceLanguage": "en",
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.displayLanguage": "en",
+    "i18n-ally.extract.autoDetect": true,
+    "i18n-ally.autoDetection": true,
+    "i18n-ally.keysInUse": [
+        "t",
+        "i18next.t",
+        "props.t",
+        "useTranslation.t"
+    ],
+    "i18n-ally.extract.ignoredByFiles": {
+        "src/components/map/NodeMap.jsx": [
+            ".mapContainer > svg"
+        ]
+    },
+    "i18n-ally.extract.ignored": [
+        ".mapContainer > svg",
+        "rgb(170, 170, 170)",
+        "rgb(170, 170, 170)",
+        "0 0 1128 695.7421875",
+        "0 0 1128 695.7421875",
+        " ▲",
+        " ▲",
+        " ▼",
+        " ▼"
+    ]
+}

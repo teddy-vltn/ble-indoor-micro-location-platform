@@ -1,0 +1,13 @@
+[Unit]
+Description=FileBeat Service for Raspberry Pi
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=%filebeat_executable_path% -c %filebeat_config_path% -e
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

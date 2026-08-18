@@ -1,0 +1,66 @@
+.topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px -20px 5px -20px;
+    background-color: #fbfbfb;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 4;
+    height: 50px; /* Ajustez cette hauteur selon vos besoins */
+  }
+  
+  .topBarLeft {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+  
+  .topTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 20px;
+  }
+  
+  .profileSelect {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  .settingsIcon {
+    color: rgb(62, 62, 62);
+    cursor: pointer;
+  }
+  
+  .topBarRight {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+  }
+  
+  .topButton {
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .topButton .topButtonText {
+    margin-left: 5px;
+  }
+  
+  .sessionText {
+    justify-content: center;
+    align-items: center;
+  }
+  

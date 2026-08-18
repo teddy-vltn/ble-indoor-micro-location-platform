@@ -1,0 +1,158 @@
+.sidebar {
+    position: fixed;
+    top: 50px; /* Ajustez en fonction de la hauteur de votre TopBar */
+    left: 0;
+    height: calc(100vh - 50px); /* Ajustez en fonction de la hauteur de votre TopBar */
+    overflow: auto;
+    background-color: white;
+    z-index: 3;
+    transition: width 0.3s ease; /* Smooth transition for width */
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  
+
+.sidebar.open {
+    width: 65px; /* Expanded width */
+}
+
+.sidebarContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.profileSelect {
+    width: 100%;
+}
+
+.lineButton {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lineSelect {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lineSelect select {
+    margin-left: 20px;
+}
+
+.sidebarFooter {
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #e0e0e0; /* Light gray border on top */
+}
+
+.sidebarFooter button {
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    margin: 0;
+    padding: 10px;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.languageToggle {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.settingsButton {
+    background-color: #555
+}
+
+.settingsButton:hover {
+    background-color: #666;
+}
+
+.refreshButton:hover {
+    background-color: #45a049;
+}
+
+.sidebarTitle {
+    margin-top: 12px;
+    font-size: 0px; /* Smaller title font size */
+    font-weight: 600;
+    color: gray; /* Darker color for better contrast */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.sidebarList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebarLink {
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebarListItem {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+    border-radius: 5px; /* Rounded corners for modern look */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    padding: 8px; /* Smaller padding for list items */
+}
+
+.sidebarListItem.active {
+    background-color: #e0e0e0; /* Light gray background on hover/active */
+}
+
+.sidebarListItem:hover {
+    background-color: #efefef; /* Lighter gray background on hover */
+}
+
+.sidebarIcon {
+    padding-top: 2px;
+    color: #666; /* Icon color */
+    font-size: 18px; /* Smaller icon size */
+    margin-right: 0; /* No space between icon and title */
+}
+
+.sidebarItemTitle {
+    display: none; /* Hide the title text */
+}
+
+.menuButton {
+    display: none;  /* Initially hidden */
+    position: fixed;
+    right: 15px;
+    bottom: 5px;
+    z-index: 1001;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .sidebar.closed {
+        width: 0; /* Hide the sidebar on smaller screens */
+    }
+
+    .menuButton {
+        display: block; /* Show this button on smaller screens */
+    }
+
+}

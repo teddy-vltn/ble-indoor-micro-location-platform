@@ -1,0 +1,234 @@
+@startuml api_players
+hide empty members
+set namespaceSeparator none
+
+interface "/players" {
+}
+
+class "GET /players" {
+.. header ..
+{field} string (mask) X-Fields
+.. query ..
+{field} string session_id
+.. responses ..
+409: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+200: {field} AllPlayersSuccessResponse 
+}
+
+"GET /players" ..> AllPlayersSuccessResponse
+
+class "POST /players" {
+.. header ..
+{field} string (mask) X-Fields
+.. body ..
+{field} CreatePlayer payload
+.. responses ..
+409: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+200: {field} PostPlayerSuccessResponse 
+}
+
+"POST /players" ..> CreatePlayer
+"POST /players" ..> PostPlayerSuccessResponse
+
+"/players" ..> "GET /players"
+"/players" ..> "POST /players"
+
+interface "/players/search" {
+}
+
+class "GET /players/search" {
+.. header ..
+{field} string (mask) X-Fields
+.. query ..
+{field} integer id_player
+{field} integer id_minor
+{field} string device
+{field} string session_id
+.. responses ..
+404: {field} NotFoundErrorResponse 
+400: {field} ErrorResponse 
+200: {field} SearchPlayersSuccessResponse 
+}
+
+"GET /players/search" ..> SearchPlayersSuccessResponse
+
+"/players/search" ..> "GET /players/search"
+
+interface "/players/wipe-players" {
+}
+
+class "DELETE /players/wipe-players" {
+.. query ..
+{field} string session_id
+.. responses ..
+200: {field} GenericSuccessResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+"/players/wipe-players" ..> "DELETE /players/wipe-players"
+
+interface "/players/{_id}" {
+}
+
+class "DELETE /players/{_id}" {
+.. path ..
+{field} string _id
+.. responses ..
+200: {field} GenericSuccessResponse 
+404: {field} ErrorResponse 
+}
+
+class "GET /players/{_id}" {
+.. header ..
+{field} string (mask) X-Fields
+.. path ..
+{field} string _id
+.. responses ..
+200: {field} PlayerSuccessResponse 
+404: {field} ErrorResponse 
+}
+
+"GET /players/{_id}" ..> PlayerSuccessResponse
+
+"/players/{_id}" ..> "DELETE /players/{_id}"
+"/players/{_id}" ..> "GET /players/{_id}"
+
+interface "/players/{_id}/finish" {
+}
+
+class "PUT /players/{_id}/finish" {
+.. path ..
+{field} string _id
+.. responses ..
+200: {field} GenericSuccessResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+"/players/{_id}/finish" ..> "PUT /players/{_id}/finish"
+
+interface "/players/{_id}/add-device/{device}" {
+}
+
+class "PUT /players/{_id}/add-device/{device}" {
+.. path ..
+{field} string _id
+{field} string device
+.. responses ..
+200: {field} GenericSuccessResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+"/players/{_id}/add-device/{device}" ..> "PUT /players/{_id}/add-device/{device}"
+
+interface "/players/{_id}/has-visited" {
+}
+
+class "POST /players/{_id}/has-visited" {
+.. header ..
+{field} string (mask) X-Fields
+.. path ..
+{field} string _id
+.. body ..
+{field} HasVisited payload
+.. responses ..
+404: {field} NotFoundErrorResponse 
+200: {field} VisitedNodesSuccessResponse 
+}
+
+"POST /players/{_id}/has-visited" ..> VisitedNodesSuccessResponse
+"POST /players/{_id}/has-visited" ..> HasVisited
+
+"/players/{_id}/has-visited" ..> "POST /players/{_id}/has-visited"
+
+class Player {
+    {field} integer id_player
+    {field} integer id_minor
+    {field} string[] devices
+    {field} string _id
+    {field} string session_id
+    {field} number started_at
+    {field} number updated_at
+    {field} string[] has_visited
+    {field} object temporal_sequence_visited
+    {field} boolean has_finished
+}
+
+class HasVisited {
+    {field} string[] nodes
+}
+
+class VisitedNodesSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} VisitedNodes data
+    {field} integer code
+}
+
+VisitedNodesSuccessResponse ..> VisitedNodesResponse
+
+class VisitedNodesResponse {
+    {field} boolean visited
+}
+
+class AllPlayersSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} AllPlayers data
+    {field} integer code
+}
+
+AllPlayersSuccessResponse ..> AllPlayers
+
+class AllPlayers {
+    {field} Player[] players
+}
+
+AllPlayers ..> Player
+
+class PostPlayerSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} PostPlayer data
+    {field} integer code
+}
+
+PostPlayerSuccessResponse ..> PostPlayer
+
+class PostPlayer {
+    {field} string player_id
+    {field} string session_id
+}
+
+class PlayerSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} Player data
+    {field} integer code
+}
+
+PlayerSuccessResponse ..> Player
+
+class SearchPlayersSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} SearchPlayers data
+    {field} integer code
+}
+
+SearchPlayersSuccessResponse ..> SearchPlayers
+
+class SearchPlayers {
+    {field} Player[] players
+}
+
+SearchPlayers ..> Player
+
+class CreatePlayer {
+    {field} integer id_player
+    {field} integer id_minor
+    {field} integer devices
+}
+
+@enduml

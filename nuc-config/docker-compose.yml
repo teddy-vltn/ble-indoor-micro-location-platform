@@ -1,0 +1,64 @@
+services:
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    depends_on:
+      - mongo
+    ports:
+      - "${MONGO_EXPRESS_PORT}:${MONGO_EXPRESS_PORT}"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+
+  graph-positioning:
+    build:
+      context: .
+      dockerfile: ./modules/graph-positioning/Dockerfile
+    container_name: graph-positioning
+    depends_on:
+      - mongo
+    volumes:
+      - ./modules:/app/modules
+      - ./config.yaml:/app/config.yaml
+    env_file:
+      - .env
+
+  api:
+    build:
+      context: .
+      dockerfile: ./modules/api/Dockerfile
+    container_name: api
+    depends_on:
+      - mongo
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    volumes:
+      - ./modules:/app/modules
+      - ./config.yaml:/app/config.yaml
+      - /home/local192/.ssh:/root/.ssh:ro
+    env_file:
+      - .env
+
+  logstash:
+    build:
+      context: ./logstash
+    container_name: logstash
+    depends_on:
+      - mongo
+    ports:
+      - "5044:5044"  # Example port for Logstash input
+      - "9600:9600"  # Example port for Logstash monitoring API
+    volumes:
+      - ./logstash:/usr/share/logstash/pipeline
+    env_file:
+      - .env
+
+volumes:
+  mongo_data:

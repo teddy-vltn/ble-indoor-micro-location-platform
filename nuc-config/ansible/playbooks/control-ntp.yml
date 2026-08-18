@@ -1,0 +1,17 @@
+- name: On récupère la date et l'heure actuelle du NUC
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Obtenir la date et l'heure actuelle
+      command: date "+%Y-%m-%d %T"
+      register: nuc_datetime
+ 
+- name: On configure la date et l'heure sur les Raspberry Pi
+  hosts: raspberry
+  become: yes
+  gather_facts: false
+  vars:
+    datetime_to_set: "{{ hostvars['localhost']['nuc_datetime'].stdout }}"
+  tasks:
+    - name: Mettre à jour la date et l'heure
+      command: sudo date -s "{{ datetime_to_set }}"

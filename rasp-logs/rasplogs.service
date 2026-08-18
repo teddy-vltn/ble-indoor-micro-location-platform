@@ -1,0 +1,14 @@
+[Unit]
+Description=RaspLogs Service to collect data from iBeacon transmission
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python3 %path_to_script%
+Restart=on-failure
+# Temps d'attente avant de redémarrer en cas d'échec
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

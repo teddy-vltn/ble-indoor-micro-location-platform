@@ -1,0 +1,75 @@
+.table-filters-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .table-filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .table-filters .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .table-filters .filter label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1;
+  }
+  
+  .table-filters .filter input,
+  .table-filters .filter select {
+    padding: 0.5rem;
+    padding-right: 2rem;
+    width: max-content;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  
+  .table-filters .filter input::-webkit-outer-spin-button,
+  .table-filters .filter input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Hide the up/down arrows for number inputs in WebKit browsers */
+    margin: 0;
+  }
+  
+  .table-filters .filter input[type="date"] {
+    width: auto;
+  }
+  
+  .table-filters .filter .multi-range-slider {
+    width: 200px;
+    max-height: 30px;
+  }
+ 
+  .reset-filters-button {
+    margin-top: 30px;
+    height: 40px;
+  }
+  
+  @media (max-width: 600px) {
+    .table-filters-wrapper {
+      flex-direction: column;
+    }
+  
+    .table-filters {
+      flex-direction: column;
+    }
+  
+    .table-filters .filter input,
+    .table-filters .filter select {
+      width: 100%;
+    }
+  
+    .reset-filters-button {
+      width: 100%;
+    }
+  }
+  

@@ -1,0 +1,67 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: fit-content;
+    max-height: 90vh;
+    min-width: 30vw;
+    max-width: 85vw;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
+    overflow-y: scroll;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.modalContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;  
+}
+
+.columnInputModal {
+    display: flex;
+    flex-direction: column;
+    margin-right : 28px;
+    gap: 15px; /* Space between inputs and other elements */
+}
+
+.lineSwitchModal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.activeText {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+@media screen and (max-width: 768px) {
+    .modal {
+        width: 80vw;
+        height: fit-content;
+    }
+    
+}

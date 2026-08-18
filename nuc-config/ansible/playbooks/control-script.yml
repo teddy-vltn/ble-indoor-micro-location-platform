@@ -1,0 +1,31 @@
+---
+- hosts: raspberry
+  become: yes
+  gather_facts: false
+  vars:
+    action: "start" # Ou "stop", "status"
+
+  tasks:
+    - name: Démarrer le service rasplogs
+      systemd:
+        name: rasplogs
+        state: started
+      when: action == 'start'
+
+    - name: Arrêter le service rasplogs
+      systemd:
+        name: rasplogs
+        state: stopped
+      when: action == 'stop'
+
+    - name: Vérifier le statut du service rasplogs
+      systemd:
+        name: rasplogs
+        state: started
+      register: rasplogs_status
+      when: action == 'status'
+
+    - name: Afficher le statut du service rasplogs
+      debug:
+        var: rasplogs_status
+      when: action == 'status'

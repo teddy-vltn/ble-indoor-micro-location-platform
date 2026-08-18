@@ -1,0 +1,11 @@
+Flask
+pymongo
+flask-restx
+requests
+flask-cors
+flask-socketio
+requests-futures
+pyyaml
+ansible-runner
+python-dotenv
+pytest

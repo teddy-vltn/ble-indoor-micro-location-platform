@@ -1,0 +1,30 @@
+.runButtonSelect select {
+    flex:3;
+}
+
+.runButtonSelect button {
+    flex:1;
+    margin-left: 10px;
+}
+
+.runButtonSelect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabLineButton {
+    display: flex;
+}
+
+.tabLineButton button {
+    margin: 0 5px;
+}
+
+.greyButton {
+    padding: 10px;
+    padding-bottom: 5px;
+    font-size: 12px;    /* Adjust font size */
+    background-color: #f0f0f0;  /* Example background color */
+    cursor: pointer;     /* Change cursor on hover */
+}

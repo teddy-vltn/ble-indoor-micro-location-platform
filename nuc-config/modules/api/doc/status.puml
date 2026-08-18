@@ -1,0 +1,30 @@
+@startuml api_status
+hide empty members
+set namespaceSeparator none
+
+interface "/status/" {
+}
+
+class "GET /status/" {
+.. responses ..
+200: {field} StatusResponse 
+}
+
+"GET /status/" ..> StatusResponse
+
+"/status/" ..> "GET /status/"
+
+class StatusResponse {
+    {field} Profile active_profile
+    {field} Session active_session
+    {field} Profile[] all_profiles
+    {field} HostCache[] inventory
+    {field} object ansible
+    {field} Graph graph
+}
+
+StatusResponse ..> Graph
+StatusResponse ..> HostCache
+StatusResponse ..> Profile
+StatusResponse ..> Session
+@enduml

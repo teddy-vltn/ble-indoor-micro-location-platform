@@ -1,0 +1,60 @@
+.control {
+    display: flex;
+    flex-direction: inline;
+    border-top: 1px solid #e0e0e0;
+    padding: 5px;
+}
+
+.controlSlider {
+    flex: 5;
+    width: 100%;
+    padding: 10px;
+}
+
+.controlButtons {
+    flex: 1;
+    display: flex;
+    padding: 10px;
+}
+
+.controlButtons button {
+    margin: 0 5px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .fixedBottom {
+        width: 60vw;
+    }
+
+    .filters {
+        margin-top: 10px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .filters select {
+        width: 100%;
+    }
+
+    .spanDate {
+        display: none;
+    }
+
+}
+
+.content::after {
+    content: "";
+    display: table;
+    clear: both;
+    height: 100px;
+}
+
+
+.table {
+    margin-top: 20px;
+}

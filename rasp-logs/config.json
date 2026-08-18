@@ -1,0 +1,6 @@
+{
+    "log_cache_size": 1,
+    "csv_cache_size": 30,
+    "major_filter_signal": 8888,
+    "csv_dir_path": "/home/admin/data/"
+}

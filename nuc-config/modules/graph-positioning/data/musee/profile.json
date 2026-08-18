@@ -1,0 +1,11 @@
+{
+    "average_rssi_weight": 0.9,
+    "beacon_count_weight": 0.1,
+    "confidence_threshold": 0.2,
+    "distance_weight": 0.3,
+    "distance_min": -0.5,
+    "distance_max": 3,
+    "time_interval_of_groups": 8,
+    "rssi_min": -94,
+    "rssi_max": -56
+}

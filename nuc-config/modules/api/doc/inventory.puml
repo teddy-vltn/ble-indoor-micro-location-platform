@@ -1,0 +1,65 @@
+@startuml api_inventory
+hide empty members
+set namespaceSeparator none
+
+interface "/inventory/hosts" {
+}
+
+class "POST /inventory/hosts" {
+.. body ..
+{field} GroupHost <b>payload</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+400: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+"POST /inventory/hosts" ..> GroupHost
+
+"/inventory/hosts" ..> "POST /inventory/hosts"
+
+interface "/inventory/hosts/{_id}" {
+}
+
+class "DELETE /inventory/hosts/{_id}" {
+.. path ..
+{field} string <b>_id</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+400: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+class "PUT /inventory/hosts/{_id}" {
+.. path ..
+{field} string <b>_id</b>
+.. body ..
+{field} GroupHost <b>payload</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+400: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+"PUT /inventory/hosts/{_id}" ..> GroupHost
+
+"/inventory/hosts/{_id}" ..> "DELETE /inventory/hosts/{_id}"
+"/inventory/hosts/{_id}" ..> "PUT /inventory/hosts/{_id}"
+
+class GroupHost {
+    {field} string <b>name</b>
+    {field} boolean active = true
+    {field} string node
+}
+
+class HostCache {
+    {field} string name
+    {field} boolean active
+    {field} string node
+    {field} boolean online
+    {field} object services
+    {field} boolean[] last_pings
+    {field} number timestamp_last_successful_ping
+}
+
+@enduml

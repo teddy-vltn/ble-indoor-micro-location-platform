@@ -1,0 +1,191 @@
+@startuml api_profiles
+hide empty members
+set namespaceSeparator none
+
+interface "/profiles" {
+}
+
+class "POST /profiles" {
+.. body ..
+{field} ProfileCreate <b>payload</b>
+.. responses ..
+201: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+}
+
+"POST /profiles" ..> ProfileCreate
+
+"/profiles" ..> "POST /profiles"
+
+interface "/profiles/finish-active-session" {
+}
+
+class "PUT /profiles/finish-active-session" {
+.. responses ..
+200: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+404: {field} ErrorResponse 
+}
+
+"/profiles/finish-active-session" ..> "PUT /profiles/finish-active-session"
+
+interface "/profiles/sessions/{session_id}" {
+}
+
+class "GET /profiles/sessions/{session_id}" {
+.. header ..
+{field} string (mask) X-Fields
+.. path ..
+{field} string <b>session_id</b>
+.. responses ..
+404: {field} ErrorResponse 
+200: {field} SessionSuccessResponse 
+}
+
+"GET /profiles/sessions/{session_id}" ..> SessionSuccessResponse
+
+"/profiles/sessions/{session_id}" ..> "GET /profiles/sessions/{session_id}"
+
+interface "/profiles/{_id}" {
+}
+
+class "PATCH /profiles/{_id}" {
+.. path ..
+{field} string <b>_id</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+409: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+class "DELETE /profiles/{_id}" {
+.. path ..
+{field} string <b>_id</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+409: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+class "PUT /profiles/{_id}" {
+.. path ..
+{field} string <b>_id</b>
+.. body ..
+{field} ProfileUpdate <b>payload</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+409: {field} ErrorResponse 
+404: {field} NotFoundErrorResponse 
+}
+
+"PUT /profiles/{_id}" ..> ProfileUpdate
+
+"/profiles/{_id}" ..> "DELETE /profiles/{_id}"
+"/profiles/{_id}" ..> "PATCH /profiles/{_id}"
+"/profiles/{_id}" ..> "PUT /profiles/{_id}"
+
+interface "/profiles/{_id}/duplicate" {
+}
+
+class "POST /profiles/{_id}/duplicate" {
+.. path ..
+{field} string <b>_id</b>
+.. responses ..
+200: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+}
+
+"/profiles/{_id}/duplicate" ..> "POST /profiles/{_id}/duplicate"
+
+interface "/profiles/{_id}/sessions" {
+}
+
+class "GET /profiles/{_id}/sessions" {
+.. header ..
+{field} string (mask) X-Fields
+.. path ..
+{field} string <b>_id</b>
+.. responses ..
+200: {field} AllSessionsSuccessResponse 
+}
+
+"GET /profiles/{_id}/sessions" ..> AllSessionsSuccessResponse
+
+"/profiles/{_id}/sessions" ..> "GET /profiles/{_id}/sessions"
+
+interface "/profiles/{_id}/start-session/{name}" {
+}
+
+class "POST /profiles/{_id}/start-session/{name}" {
+.. path ..
+{field} string <b>_id</b>
+{field} string <b>name</b>
+.. responses ..
+201: {field} GenericSuccessResponse 
+500: {field} ErrorResponse 
+409: {field} ErrorResponse 
+}
+
+"/profiles/{_id}/start-session/{name}" ..> "POST /profiles/{_id}/start-session/{name}"
+
+class Profile {
+    {field} string _id
+    {field} string name
+    {field} number created_at
+    {field} number updated_at
+    {field} string graph_id
+    {field} string group_id
+    {field} string graph_svg
+    {field} Session[] sessions
+}
+
+Profile ..> Session
+
+class ProfileCreate {
+    {field} string <b>name</b>
+    {field} string graph_svg
+}
+
+class ProfileUpdate {
+    {field} string <b>new_name</b>
+    {field} string graph_svg
+}
+
+class AllSessionsSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} AllSessions data
+    {field} integer code
+}
+
+AllSessionsSuccessResponse ..> AllSessions
+
+class AllSessions {
+    {field} Session[] sessions
+}
+
+AllSessions ..> Session
+
+class SessionSuccessResponse {
+    {field} string message
+    {field} string status
+    {field} Session data
+    {field} integer code
+}
+
+SessionSuccessResponse ..> Session
+
+class Session {
+    {field} string _id
+    {field} string name
+    {field} string profile_id
+    {field} number started_at
+    {field} number finished_at
+    {field} Player[] players
+}
+
+Session ..> Player
+@enduml
